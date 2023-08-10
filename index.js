@@ -32,6 +32,34 @@ document.addEventListener("mousemove", (event) => {
   cursorCircle.style.backgroundImage = textColor;
   console.log(textColor);
 });
+
+document.addEventListener("touchstart", (event) => {
+  handleTouch(event);
+});
+
+document.addEventListener("touchmove", (event) => {
+  handleTouch(event);
+});
+
+function handleTouch(event) {
+  const cursorCircle = document.querySelector(".cursor-circle");
+  const touch = event.touches[0];
+
+  if (touch) {
+    cursorCircle.style.left = touch.pageX + "px";
+    cursorCircle.style.top = touch.pageY + "px";
+
+    // Get the background color of the element at the touch position
+    const elementAtTouch = document.elementFromPoint(
+      touch.clientX,
+      touch.clientY
+    );
+    const textColor = window.getComputedStyle(elementAtTouch).backgroundImage;
+    cursorCircle.style.backgroundImage = textColor;
+    console.log(textColor);
+  }
+}
+
 let intro = document.querySelector(".intro");
 let logo = document.querySelector(".logo header");
 let logoSpan = document.querySelectorAll(".logo");
